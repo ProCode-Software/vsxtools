@@ -1,5 +1,7 @@
-# vsxtools (WIP)
-A CLI and JavaScript framework building VSCode extensions.
+# vsxtools
+**Note:** This is still a work in progress
+
+A CLI and JavaScript framework for building VSCode extensions.
 
 ## Features
 - 📕 Write TextMate grammars and product icon themes with TypeScript
