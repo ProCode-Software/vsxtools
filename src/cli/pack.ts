@@ -1,6 +1,6 @@
-export function runPackCmd() {
+export function runPack() {
     
 }
-export function runInstallCmd() {
+export function runInstall() {
 
 }

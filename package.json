@@ -4,24 +4,37 @@
     "description": "Developer tools for building VSCode extensions",
     "main": "dist/cli/vsxtools.js",
     "type": "module",
-    "files": [ "dist", "assets", "types", "bin" ],
+    "files": [
+        "dist",
+        "assets",
+        "types",
+        "bin"
+    ],
     "scripts": {
         "build": "bunx tsc",
-        "start": "bun run ./src/cli/vsxtools.ts"
+        "start": "bun run ./src/cli/vsxtools.ts",
+        "dev": "bun run build && bun link"
     },
     "exports": {
+        ".": {
+            "types": "./types/vsxtools.d.ts",
+            "default": "./dist/lib/vsxtools.js"
+        },
         "./*": {
             "types": "./types/*.d.ts",
             "default": "./dist/lib/*.js"
         }
     },
     "bin": {
-        "vsxtools": "bin/vsxtools"
+        "vsxtools": "dist/cli/vsxtools.js"
     },
     "optionalDependencies": {
         "@vscode/codicons": "^0.0.39"
     },
-    "keywords": [ "vscode", "cli" ],
+    "keywords": [
+        "vscode",
+        "cli"
+    ],
     "author": "ProCode Software",
     "license": "MIT",
     "devDependencies": {

@@ -21,6 +21,9 @@
         "noUncheckedSideEffectImports": true,
         "moduleDetection": "force",
         "skipLibCheck": true,
+        "paths": {
+            "$/*": [ "./types/*.js" ],
+        },
     },
     "include": [ "./src/**/*" ],
     "exclude": [ "./types" ]

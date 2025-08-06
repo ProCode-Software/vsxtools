@@ -1,6 +1,6 @@
 import type { Expression, Include } from '../../types/tmLanguage.js'
 
-export * from '../../types/tmLanguage.js'
+//export type * from '../../types/tmLanguage.js'
 
 /**
  * Adds a `match`-`name` pattern.
