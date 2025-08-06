@@ -1,0 +1,6 @@
+#!/usr/bin/env sh
+if command -v bun > /dev/null 2>/dev/null; then
+    bun run ./dist/cli/vsxtools.js "$@"
+else
+    node ./dist/cli/vsxtools.js "$@"
+fi

@@ -1,0 +1,10 @@
+{
+    "tabWidth": 4,
+    "singleQuote": true,
+    "arrowParens": "avoid",
+    "objectWrap": "collapse",
+    "semi": false,
+    "printWidth": 90,
+    "trailingComma": "es5",
+    "useTabs": false
+}

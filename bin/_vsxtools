@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+SCRIPT_DIR=$(dirname $(realpath "${BASH_SOURCE[0]}"))
+ROOT=$(realpath "$SCRIPT_DIR/..")
+source "$ROOT/bin/utils.sh"
+VERSION=$(jq -r .version "$ROOT/package.json")
+
+help="$(ansi '1;33' vsxtools) $(ansi 2 "(v$VERSION)")
+$(ansi 32 "Developer tools for building VSCode extensions")
+
+$(ansi 1 Usage:) $(ansi 36 'vsxtools <command> [options]')
+
+$(ansi 1 Commands:)
+    $(ansi 33 add-prettier)        Add the recommeneded .prettierrc file to the project
+    $(ansi 33 build-grammar)       Build a TextMate grammar file
+    $(ansi 33 build-theme)         Build a TextMate theme file
+"
+
+if [[ -z $1 ]]; then
+    echo -ne "$help"
+    exit 1
+fi
+
+cmd=$1
+shift
+case $cmd in
+    add-prettier)
+        . "$SCRIPT_DIR/add-prettier.sh" "$@"
+        ;;
+    build-grammar)
+        . "$SCRIPT_DIR/build-grammar.sh" "$@"
+        ;;
+    build-theme)
+        error "build-theme is not implemented yet"
+        ;;
+    --help | help | -h)
+        echo -ne "$help"
+        exit 0
+        ;;
+    *)
+        echo -ne "$(error "Unknown command '$cmd'")\n\n$help"
+        exit 1
+        ;;
+esac
