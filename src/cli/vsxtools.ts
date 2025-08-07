@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 import { program } from 'commander'
-import { runNew } from './new.js'
-import { runAdd } from './add.js'
-import { runRun } from './run.js'
-import { runInstall, runPack } from './pack.js'
+import { runNew } from './new.ts'
+import { runAdd } from './add.ts'
+import { runRun } from './run.ts'
+import { runInstall, runPack } from './pack.ts'
 
 const vsxtoolsCommands: {
     name: string

@@ -14,7 +14,7 @@ export function error(text: string, exit?: boolean) {
 }
 
 export function initWorker(filePath: string): URL {
-    return new URL(filePath + '.js', import.meta.url)
+    return new URL(`./workers/${filePath}.json`, import.meta.url)
 }
 
 export interface GrammarWorkerParams {

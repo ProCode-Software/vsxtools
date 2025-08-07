@@ -1,6 +1,12 @@
 import { Worker } from 'worker_threads'
-import { resolveConfig } from './config.js'
-import { error, getJSONOutFile, GrammarWorkerParams, initWorker, Resolver } from './utils.js'
+import { resolveConfig } from './config.ts'
+import {
+    error,
+    getJSONOutFile,
+    GrammarWorkerParams,
+    initWorker,
+    Resolver,
+} from './utils.ts'
 import { Product } from '$/vsxtools'
 
 let watch: boolean

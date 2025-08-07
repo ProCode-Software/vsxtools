@@ -1,5 +1,5 @@
 import { join, resolve } from 'path'
-import { __assetDir, error, success } from './utils.js'
+import { __assetDir, error, success } from './utils.ts'
 import { copyFileSync, existsSync, writeFileSync } from 'fs'
 import { cwd } from 'process'
 

@@ -7,3 +7,4 @@ import type { ExtensionConfig } from '$/vsxtools'
 export function defineConfig(config: ExtensionConfig): ExtensionConfig {
     return config
 }
+

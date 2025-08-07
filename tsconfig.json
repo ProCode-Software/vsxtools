@@ -6,10 +6,11 @@
         "outDir": "./dist",
         "module": "nodenext",
         "target": "esnext",
-        "lib": [ "esnext" ],
-        "types": [ "node", "bun" ],
+        "lib": ["esnext"],
+        "types": ["node", "bun"],
         "sourceMap": true,
         "declaration": true,
+        "rewriteRelativeImportExtensions": true,
 
         "noFallthroughCasesInSwitch": true,
         "noImplicitAny": false,
@@ -21,10 +22,8 @@
         "noUncheckedSideEffectImports": true,
         "moduleDetection": "force",
         "skipLibCheck": true,
-        "paths": {
-            "$/*": [ "./types/*.js" ],
-        },
+        "paths": { "$/*": ["./types/*.js"] }
     },
-    "include": [ "./src/**/*" ],
-    "exclude": [ "./types" ]
+    "include": ["./src/**/*"],
+    "exclude": ["./types"]
 }

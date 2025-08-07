@@ -1,6 +1,4 @@
-import type { Expression, Include } from '../../types/tmLanguage.js'
-
-//export type * from '../../types/tmLanguage.js'
+import type { Expression, Include } from '$/tmLanguage'
 
 /**
  * Adds a `match`-`name` pattern.
@@ -33,7 +31,7 @@ export const match = (match: Expression, name: string) => ({ match, name })
  * ```
  */
 export function merge(...expressions: Expression[]): Expression {
-    const joined = expressions.map((e) => e instanceof RegExp ? e.source : e).join('')
+    const joined = expressions.map(e => (e instanceof RegExp ? e.source : e)).join('')
     try {
         return new RegExp(joined)
     } catch {

@@ -1,6 +1,2 @@
-export function runPack() {
-    
-}
-export function runInstall() {
-
-}
+export function runPack() {}
+export function runInstall() {}

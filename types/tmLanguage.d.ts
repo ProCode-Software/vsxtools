@@ -38,10 +38,7 @@ export type Pattern =
       } & PatternOtherTypes)
 
 export type PatternOtherTypes =
-    | {
-          match: Expression
-          captures?: Captures
-      }
+    | { match: Expression; captures?: Captures }
     | BeginEndPattern
     | {}
 

@@ -1,5 +1,5 @@
 import { workerData } from 'worker_threads'
-import { GrammarWorkerParams } from './utils.js'
+import { GrammarWorkerParams } from '../utils.ts'
 import { watchFile } from 'fs'
 import ansiColors from 'ansi-colors'
 import { writeFile } from 'fs/promises'
@@ -48,5 +48,7 @@ if (watch) {
     console.log(yellow(`Watching ${cyan(shortSrcPath)} for changes...`))
     watchFile(srcPath, update)
 } else {
-    console.log(green(`Successfully built ${cyan(shortSrcPath)} to ${cyan(shortOutPath)}!`))
+    console.log(
+        green(`Successfully built ${cyan(shortSrcPath)} to ${cyan(shortOutPath)}!`)
+    )
 }

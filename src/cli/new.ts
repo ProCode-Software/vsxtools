@@ -32,17 +32,14 @@ export async function runNew(dir: string | undefined) {
             message: 'Extension name',
             default: path.basename(process.cwd()),
         }),
-        identifier: ""
+        identifier: '',
     }
     extensionInfo.identifier = await input({
         message: 'Extension identifier',
         default: extensionInfo.name!.toLowerCase().replace(' ', '-'),
     })
     if (extensionInfo.type == 'language') {
-        extensionInfo.addLSP = await confirm({
-            message: 'Add LSP',
-            default: false,
-        })
+        extensionInfo.addLSP = await confirm({ message: 'Add LSP', default: false })
         extensionInfo.languageName = await input({ message: 'Language name' })
         extensionInfo.languageID = await input({
             message: 'Language ID',
