@@ -21,6 +21,7 @@ export interface GrammarWorkerParams {
     srcPath: string
     outPath: string
     watch: boolean
+    indent: number
 }
 
 export function getJSONOutFile({ outputDir, outputFile }: Product, file: string): string {

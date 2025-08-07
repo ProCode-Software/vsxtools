@@ -7,16 +7,17 @@ import {
     initWorker,
     Resolver,
 } from './utils.ts'
-import { Product } from '$/vsxtools'
+import { ExtensionConfig, Product } from '$/vsxtools'
 
-let watch: boolean
+let config: ExtensionConfig
 
 export async function runRun(item: string = 'default') {
-    const { config, resolve } = await resolveConfig()
-    const product = config.configurations[item]
+    const { config: c, resolve } = await resolveConfig()
+    config = c
+    const product = c.configurations[item]
     if (!product) error(`Can't find configuration named '${item}'`)
     if (!product.inputs || !product.inputs.length) error(`No inputs provided`)
-    watch = config.watch ?? false
+
     switch (product.type) {
         case 'language':
             runGrammarConfig(product, resolve)
@@ -34,7 +35,8 @@ async function runGrammarConfig(product: Product, resolve: Resolver) {
             workerData: {
                 srcPath: resolve(input),
                 outPath: resolve(getJSONOutFile(product, input)),
-                watch,
+                watch: config.watch ?? false,
+                indent: config.jsonIndent ?? 0,
             } satisfies GrammarWorkerParams,
         })
     }

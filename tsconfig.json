@@ -25,5 +25,5 @@
         "paths": { "$/*": ["./types/*.js"] }
     },
     "include": ["./src/**/*"],
-    "exclude": ["./types"]
+    "exclude": ["./types", "node_modules", "**/node_modules"]
 }

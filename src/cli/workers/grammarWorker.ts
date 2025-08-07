@@ -6,7 +6,7 @@ import { writeFile } from 'fs/promises'
 import { basename } from 'path'
 const { cyan, dim, green, red, yellow } = ansiColors
 
-const { outPath, srcPath, watch }: GrammarWorkerParams = workerData
+const { outPath, srcPath, watch, indent }: GrammarWorkerParams = workerData
 const shortSrcPath = basename(srcPath),
     shortOutPath = basename(outPath)
 
