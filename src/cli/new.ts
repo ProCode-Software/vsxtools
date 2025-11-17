@@ -1,7 +1,6 @@
 import { confirm, input, select } from '@inquirer/prompts'
-import ansiColors from 'ansi-colors'
 import path from 'node:path'
-const { green, yellow, cyan, red, magenta } = ansiColors
+import { green, yellow, cyan, red, magenta } from './utils.ts'
 
 interface ExtensionInfo {
     dir: string
@@ -43,7 +42,7 @@ export async function runNew(dir: string | undefined) {
         extensionInfo.languageName = await input({ message: 'Language name' })
         extensionInfo.languageID = await input({
             message: 'Language ID',
-            default: extensionInfo.languageName.toLowerCase().replaceAll(' ', ''),
+            default: extensionInfo.languageName!.toLowerCase().replaceAll(' ', ''),
         })
     }
 }

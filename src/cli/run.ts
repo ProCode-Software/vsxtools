@@ -28,7 +28,7 @@ export async function runRun(item: string = 'default') {
 }
 
 async function runGrammarConfig(product: Product, resolve: Resolver) {
-    const workerPath = initWorker('./grammarWorker')
+    const workerPath = initWorker('grammarWorker')
     for (const input of product.inputs) {
         new Worker(workerPath, {
             name: 'Grammar Worker',

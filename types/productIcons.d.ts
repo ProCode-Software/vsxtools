@@ -1,4 +1,4 @@
-import { codiconsLibrary } from '@vscode/codicons/dist/codiconsLibrary.ts'
+import { codiconsLibrary } from '@vscode/codicons/src/template/mapping.json'
 
 type CodiconName = keyof typeof codiconsLibrary
 

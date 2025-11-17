@@ -1,10 +1,8 @@
 import { workerData } from 'worker_threads'
-import { GrammarWorkerParams } from '../utils.ts'
+import { cyan, dim, GrammarWorkerParams, green, red, yellow } from '../utils.ts'
 import { watchFile } from 'fs'
-import ansiColors from 'ansi-colors'
 import { writeFile } from 'fs/promises'
 import { basename } from 'path'
-const { cyan, dim, green, red, yellow } = ansiColors
 
 const { outPath, srcPath, watch, indent }: GrammarWorkerParams = workerData
 const shortSrcPath = basename(srcPath),
@@ -31,7 +29,7 @@ function replacer(k: string, v: any): any {
 async function update() {
     try {
         let { default: tmLanguage } = await import(`${srcPath}?t=${Date.now()}`)
-        await writeFile(outPath, JSON.stringify(tmLanguage, replacer, 4))
+        await writeFile(outPath, JSON.stringify(tmLanguage, replacer, indent))
 
         const date = new Date().toLocaleTimeString()
         console.log(dim(date) + green(` Updated ${cyan(shortOutPath)}`))

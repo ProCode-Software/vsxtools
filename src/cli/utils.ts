@@ -1,20 +1,20 @@
 import { Product } from '$/vsxtools'
-import ansiColors from 'ansi-colors'
 import { join, parse } from 'path'
+import { styleText } from 'util'
 
 export const __assetDir = join(import.meta.dirname, '../../assets')
 
 export function success(text: string) {
-    console.log(ansiColors.green(text))
+    console.log(green(text))
 }
 
-export function error(text: string, exit?: boolean) {
-    console.log(ansiColors.red(text))
+export function error(text: string, exit: boolean = true) {
+    console.log(red(text))
     if (exit) process.exit(1)
 }
 
 export function initWorker(filePath: string): URL {
-    return new URL(`./workers/${filePath}.json`, import.meta.url)
+    return new URL(`./workers/${filePath}.js`, import.meta.url)
 }
 
 export interface GrammarWorkerParams {
@@ -33,3 +33,14 @@ export function getJSONOutFile({ outputDir, outputFile }: Product, file: string)
 }
 
 export type Resolver = (path: string) => string
+
+export const green = (text: string) => styleText('green', text)
+export const yellow = (text: string) => styleText('yellow', text)
+export const red = (text: string) => styleText('red', text)
+export const blue = (text: string) => styleText('blue', text)
+export const magenta = (text: string) => styleText('magenta', text)
+export const cyan = (text: string) => styleText('cyan', text)
+export const black = (text: string) => styleText('black', text)
+export const bold = (text: string) => styleText('bold', text)
+export const dim = (text: string) => styleText('dim', text)
+export const white = (text: string) => styleText('white', text)
