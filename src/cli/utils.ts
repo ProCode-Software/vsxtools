@@ -34,13 +34,16 @@ export function getJSONOutFile({ outputDir, outputFile }: Product, file: string)
 
 export type Resolver = (path: string) => string
 
-export const green = (text: string) => styleText('green', text)
-export const yellow = (text: string) => styleText('yellow', text)
-export const red = (text: string) => styleText('red', text)
-export const blue = (text: string) => styleText('blue', text)
-export const magenta = (text: string) => styleText('magenta', text)
-export const cyan = (text: string) => styleText('cyan', text)
-export const black = (text: string) => styleText('black', text)
-export const bold = (text: string) => styleText('bold', text)
-export const dim = (text: string) => styleText('dim', text)
-export const white = (text: string) => styleText('white', text)
+const styled = (color: any, text: string) =>
+    styleText(color, text, { validateStream: false })
+
+export const green = (text: string) => styled('green', text)
+export const yellow = (text: string) => styled('yellow', text)
+export const red = (text: string) => styled('red', text)
+export const blue = (text: string) => styled('blue', text)
+export const magenta = (text: string) => styled('magenta', text)
+export const cyan = (text: string) => styled('cyan', text)
+export const black = (text: string) => styled('black', text)
+export const bold = (text: string) => styled('bold', text)
+export const dim = (text: string) => styled('dim', text)
+export const white = (text: string) => styled('white', text)
