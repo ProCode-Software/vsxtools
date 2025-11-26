@@ -1,6 +1,6 @@
-import { codiconsLibrary } from '@vscode/codicons/src/template/mapping.json'
+import codiconList from '@vscode/codicons/src/template/mapping.json' with { type: 'json' }
 
-type CodiconName = keyof typeof codiconsLibrary
+type CodiconName = keyof typeof codiconList
 
 export interface CodepointIcon {
     character: string

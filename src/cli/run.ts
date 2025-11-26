@@ -7,7 +7,7 @@ import {
     initWorker,
     Resolver,
 } from './utils.ts'
-import { ExtensionConfig, Product } from '$/vsxtools'
+import { ExtensionConfig, Product } from '$/vsxtools/vsxtools'
 
 let config: ExtensionConfig
 

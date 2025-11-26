@@ -1,4 +1,4 @@
-import { Product } from '$/vsxtools'
+import { Product } from '$/vsxtools/vsxtools'
 import { join, parse } from 'path'
 import { styleText } from 'util'
 

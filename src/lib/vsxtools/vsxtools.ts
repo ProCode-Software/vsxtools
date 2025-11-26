@@ -1,4 +1,5 @@
-import type { ExtensionConfig } from '$/vsxtools'
+import type { ExtensionConfig } from './types.ts'
+
 
 /**
  * Returns the config passed. The purpose of this function is to enable type-checking

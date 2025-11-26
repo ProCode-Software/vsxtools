@@ -1,4 +1,6 @@
-import type { Expression, Include } from '$/tmLanguage'
+import type { Expression, Include } from './types.ts'
+
+export * from './types.ts'
 
 /**
  * Adds a `match`-`name` pattern.

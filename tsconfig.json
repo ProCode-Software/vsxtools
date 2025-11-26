@@ -23,7 +23,7 @@
         "noUncheckedSideEffectImports": true,
         "moduleDetection": "force",
         "skipLibCheck": true,
-        "paths": { "$/*": ["./types/*.js"] },
+        "paths": { "$/*": ["./dist/lib/*.js"] },
     },
     "include": ["./src/**/*"],
     "exclude": ["./types", "node_modules", "**/node_modules"]

@@ -1,4 +1,4 @@
-import type { CodepointIcon } from '$/productIcons'
+import type { CodepointIcon } from './types.ts'
 
 export function codepoint(codepoint: number | string, fontId?: string): CodepointIcon {
     return {

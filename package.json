@@ -21,8 +21,8 @@
             "default": "./dist/lib/vsxtools.js"
         },
         "./*": {
-            "types": "./types/*.d.ts",
-            "default": "./dist/lib/*.js"
+            "types": "./dist/lib/*/*.d.ts",
+            "default": "./dist/lib/*/*.js"
         }
     },
     "bin": {
