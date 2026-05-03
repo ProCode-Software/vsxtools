@@ -24,12 +24,26 @@ export type Product = {
     outputFile?: string
     id?: string
     name?: string
-} & (ColorThemeConfig | ProductIconThemeConfig | {})
+} & (ColorThemeConfig | ProductIconThemeConfig | {}) // TODO: update with more product types
 
 export interface ColorThemeConfig {
     type: 'color-theme'
     variables: { path: string } | { inline: boolean }
 }
+
+export interface ProductIconThemeConfig {
+    type: 'product-icons'
+    fonts: (string | FontConfig | SVGFontConfig)[]
+
+    /**
+     * Whether all glyphs in one of `fonts` that match the name of a codicon should be added.
+     * The first font defined in the `fonts` property gets the highest priority.
+     * */
+    importExistingIconNames: boolean | string[]
+}
+
+// Fonts
+// =========
 
 /** Configuration for an existing font */
 export interface FontConfig {
@@ -46,15 +60,4 @@ export interface SVGFontConfig {
     svgDir: string
     outputFile: string
     outputFormat?: 'woff' | 'woff2' | 'ttf' | 'otf'
-}
-
-export interface ProductIconThemeConfig {
-    type: 'product-icons'
-    fonts: (string | FontConfig | SVGFontConfig)[]
-
-    /**
-     * Whether all glyphs in one of `fonts` that match the name of a codicon should be added.
-     * The first font defined in the `fonts` property gets the highest priority.
-     * */
-    importExistingIconNames: boolean | string[]
 }

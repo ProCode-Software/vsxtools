@@ -1,50 +1,50 @@
 {
     "name": "vsxtools",
-    "version": "1.0.0",
+    "version": "0.0.1",
     "description": "Developer tools for building VSCode extensions",
-    "main": "dist/cli/vsxtools.js",
-    "type": "module",
+    "keywords": [
+        "cli",
+        "vscode"
+    ],
+    "license": "MIT",
+    "author": "ProCode Software",
+    "bin": {
+        "vsxtools": "dist/cli/vsxtools.js"
+    },
     "files": [
         "dist",
         "assets",
-        "types",
-        "bin"
+        "types"
     ],
-    "scripts": {
-        "build": "bunx tsc",
-        "start": "bun run ./src/cli/vsxtools.ts",
-        "dev": "bun run build && bun link"
-    },
+    "type": "module",
+    "main": "dist/cli/vsxtools.js",
     "exports": {
         ".": {
-            "types": "./types/vsxtools.d.ts",
-            "default": "./dist/lib/vsxtools.js"
+            "types": "./dist/lib/vsxtools/vsxtools.d.ts",
+            "default": "./dist/lib/vsxtools/vsxtools.js"
         },
         "./*": {
             "types": "./dist/lib/*/*.d.ts",
             "default": "./dist/lib/*/*.js"
         }
     },
-    "bin": {
-        "vsxtools": "dist/cli/vsxtools.js"
+    "scripts": {
+        "build": "bun tsgo",
+        "start": "bun run ./src/cli/vsxtools.ts",
+        "dev": "bun tsgo --watch"
     },
-    "optionalDependencies": {
-        "@vscode/codicons": "^0.0.39"
+    "dependencies": {
+        "@inquirer/prompts": "^8.4.2",
+        "commander": "^14.0.3"
     },
-    "keywords": [
-        "vscode",
-        "cli"
-    ],
-    "author": "ProCode Software",
-    "license": "MIT",
     "devDependencies": {
-        "@types/bun": "^1.3.2",
-        "@types/node": "^24.10.1",
+        "@types/bun": "^1.3.13",
+        "@types/node": "^25.6.0",
         "@typescript/native-preview": "latest",
         "@vscode/codicons": "latest"
     },
-    "dependencies": {
-        "@inquirer/prompts": "^7.10.1",
-        "commander": "^14.0.2"
+    "optionalDependencies": {
+        "@vscode/codicons": "^0.0.45",
+        "@vscode/vsce": "^3.9.1"
     }
 }
