@@ -1,6 +1,7 @@
 # vsxtools
 
-**Note:** This is still a work in progress
+> [!WARNING]
+> **Note:** This is still a work in progress. Expect partially-implemented functionality. More features will be added in the future.
 
 A CLI and JavaScript framework for building VSCode extensions.
 
@@ -11,11 +12,13 @@ A CLI and JavaScript framework for building VSCode extensions.
 - ⭐ Easily generate SVG fonts suitable for product icon themes
 - 🔧 Configuration-based build process
 
+<!--
 ## Used in
 
 vsxtools is already being used in my personal projects
 
 - [my VSCode themes](https://github.com/ProCode-Software/vscode-themes)
+-->
 
 ## Configuration
 
