@@ -1,4 +1,4 @@
-import { Product } from '$/vsxtools/vsxtools'
+import { Product } from '$lib/vsxtools/vsxtools'
 import { error } from 'console'
 import { join, parse } from 'path'
 import { green } from './cli.ts'

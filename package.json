@@ -5,7 +5,7 @@
     "type": "module",
     "main": "dist/lib/vsxtools/vsxtools.js",
     "scripts": {
-        "build": "bun tsgo",
+        "build": "bun run ./scripts/syncVendored.ts && bun tsgo",
         "start": "bun run ./src/cli/vsxtools.ts",
         "dev": "bun tsgo --watch",
         "check": "bun tsgo --noEmit"
@@ -46,6 +46,7 @@
     ],
     "dependencies": {
         "@inquirer/prompts": "^8.4.2",
+        "archiver": "^8.0.0",
         "commander": "^14.0.3"
     },
     "devDependencies": {
