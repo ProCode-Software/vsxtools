@@ -1,6 +1,6 @@
 import { confirm, input, select } from '@inquirer/prompts'
 import path from 'node:path'
-import { green, yellow, cyan, red, magenta } from './utils.ts'
+import { green, yellow, cyan, red, magenta } from './utils/cli.ts'
 
 interface ExtensionInfo {
     dir: string

@@ -1,7 +1,7 @@
 import { ExtensionConfig } from '$/vsxtools/vsxtools'
 import { existsSync } from 'fs'
 import { dirname, join } from 'path'
-import { error } from './utils.ts'
+import { error } from './utils/cli.ts'
 
 export interface ResolvedConfig {
     config: ExtensionConfig

@@ -1,7 +1,8 @@
+import { copyFileSync, existsSync } from 'fs'
 import { join, resolve } from 'path'
-import { __assetDir, error, success } from './utils.ts'
-import { copyFileSync, existsSync, writeFileSync } from 'fs'
 import { cwd } from 'process'
+import { error, success } from './utils/cli.ts'
+import { __assetDir } from './utils/path.ts'
 
 export function runAdd(
     kind: string,
