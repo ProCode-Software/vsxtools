@@ -1,3 +1,5 @@
+import { ManifestPackage } from "#vendor/manifest.js"
+
 export interface ExtensionConfig {
     configurations: Record<string, Product>
     manifest?: ExtensionManifest
@@ -8,7 +10,7 @@ export interface ExtensionConfig {
     jsonIndent?: number
 }
 
-export interface ExtensionManifest {}
+type ExtensionManifest = ManifestPackage
 
 export type ProductType =
     | 'color-theme'

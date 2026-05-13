@@ -30,6 +30,11 @@
             "default": "./dist/lib/*/*.js"
         }
     },
+    "imports": {
+        "#lib/*": "./dist/lib/*.js",
+        "#vendor/*": "./dist/vendor/*",
+        "#/*": "./dist/*"
+    },
     "homepage": "https://github.com/ProCode-Software/vsxtools",
     "repository": {
         "type": "git",
@@ -45,13 +50,13 @@
         "vscode-extension"
     ],
     "dependencies": {
-        "@inquirer/prompts": "^8.4.2",
-        "archiver": "^8.0.0",
+        "@inquirer/prompts": "^8.4.3",
+        "adm-zip": "^0.5.17",
         "commander": "^14.0.3"
     },
     "devDependencies": {
         "@types/bun": "^1.3.13",
-        "@types/node": "^25.6.0",
+        "@types/node": "^25.7.0",
         "@typescript/native-preview": "latest",
         "@vscode/codicons": "latest"
     },

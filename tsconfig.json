@@ -23,17 +23,12 @@
         "noUncheckedSideEffectImports": true,
         "moduleDetection": "force",
         "skipLibCheck": true,
-        "paths": {
-            "$lib/*": ["./src/lib/*.ts"],
-            "$vendor/*": ["./src/vendor/*"],
-            "$/*": ["./src/*"],
-        },
         "noPropertyAccessFromIndexSignature": true,
         "erasableSyntaxOnly": true,
         "allowJs": true,
         "checkJs": true,
-        "strictNullChecks": true,
+        "strictNullChecks": true
     },
     "include": ["./src/**/*"],
-    "exclude": ["./types", "node_modules", "**/node_modules"],
+    "exclude": ["./types", "node_modules", "**/node_modules"]
 }

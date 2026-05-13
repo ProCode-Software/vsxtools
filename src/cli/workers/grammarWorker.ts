@@ -4,7 +4,7 @@ import { basename } from 'path'
 import { workerData } from 'worker_threads'
 import { cyan, dim, green, red, yellow } from '../utils/cli.ts'
 import { GrammarWorkerParams } from './params.ts'
-import { generateTextMateGrammar as generateGrammarJSON } from '$lib/api/grammar'
+import { generateTextMateGrammar as generateGrammarJSON } from '#lib/api/grammar'
 
 const { outPath, srcPath, watch, indent }: GrammarWorkerParams = workerData
 const shortSrcPath = basename(srcPath)
