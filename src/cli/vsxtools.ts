@@ -4,12 +4,14 @@ import { runNew } from './new.ts'
 import { runAdd } from './add.ts'
 import { runRun } from './run.ts'
 import { runInstall, runPack } from './pack.ts'
+import { runListFiles } from './list.ts'
 
 const vsxtoolsCommands: {
     name: string
     description: string
     action: (...args: any[]) => void
     options?: [string, string, (string | boolean | string[])?][]
+    aliases?: string[]
 }[] = [
     { name: 'new [dir]', description: 'Create a new extension', action: runNew },
     { name: 'run [configuration]', description: 'Run a configuration', action: runRun },
@@ -25,10 +27,17 @@ const vsxtoolsCommands: {
         description: 'Package and install an extension',
         action: runInstall,
     },
+    {
+        name: 'list-files [dir]',
+        description: 'List all files in an extension',
+        action: runListFiles,
+        aliases: ['ls-files', 'lsf'],
+    },
 ]
 
-for (const { name, description, action, options } of vsxtoolsCommands) {
+for (const { name, description, action, options, aliases } of vsxtoolsCommands) {
     const cmd = program.command(name).description(description).action(action)
     if (options) for (const opt of options) cmd.option(...opt)
+    if (aliases) for (const alias of aliases) cmd.alias(alias)
 }
 program.parse()
