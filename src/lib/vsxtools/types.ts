@@ -10,7 +10,7 @@ export interface ExtensionConfig {
     jsonIndent?: number
 }
 
-type ExtensionManifest = ManifestPackage
+export type ExtensionManifest = ManifestPackage
 
 export type ProductType =
     | 'color-theme'
