@@ -1,3 +1,7 @@
+/**
+ * Converts a TextMate grammar defined as a JS object into
+ * stringified JSON suitable for VSCode grammars.
+ */
 export function generateTextMateGrammar(input: {}, indent: number = 2): string {
     return JSON.stringify(input, replacer, indent)
 }

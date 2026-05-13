@@ -1,19 +1,22 @@
 import type { ManifestPackage } from '#vendor/manifest.js'
-// import { JSONC } from 'bun'
-const JSONC = JSON
-import { existsSync, globSync, readFileSync, stat, statSync } from 'node:fs'
+import { existsSync, globSync, readFileSync, statSync } from 'node:fs'
 import { join } from 'node:path'
+import { parseJSONC } from '../../cli/utils/jsonc.ts'
 
 export interface ExtensionContext {
     manifest: ManifestPackage
     cwd: string
 }
 
+/**
+ * Returns the files included in the extension, as defined by `ctx.manifest.files` and `.vscodeignore`
+ */
 export function getExtensionFiles(ctx: ExtensionContext): string[] {
     const { cwd, manifest } = ctx
     const files: Set<string> = new Set()
 
-    // globSync.exclude doesn't support `!...` patterns
+    // globSync.exclude doesn't support `!...` patterns.
+    // Move them into their own array that is included manually.
     const include: string[] = []
     const exclude = getIgnoredFiles(ctx).filter(pat => {
         let count = 0
@@ -21,7 +24,7 @@ export function getExtensionFiles(ctx: ExtensionContext): string[] {
             if (x != '!') break
             count++
         }
-        if (count > 0) {
+        if (count % 2 == 1) {
             include.push(pat.slice(count))
             return false
         }
@@ -30,6 +33,7 @@ export function getExtensionFiles(ctx: ExtensionContext): string[] {
 
     for (const pattern of manifest.files ?? ['./**']) {
         collectFiles(globSync(pattern, { cwd, exclude }))
+        // In case `pattern` is a directory
         collectFiles(globSync(pattern + '/**', { cwd, exclude }))
     }
 
@@ -47,24 +51,30 @@ export function getExtensionFiles(ctx: ExtensionContext): string[] {
     return Array.from(files)
 }
 
-function getIgnoredFiles({ cwd, manifest }: ExtensionContext): string[] {
+/**
+ * Returns the patterns of ignored files as defined by `.vscodeignore`
+ * and the manifest's `devDependencies`
+ * @see https://code.visualstudio.com/api/working-with-extensions/publishing-extension#using-.vscodeignore
+ */
+export function getIgnoredFiles({ cwd, manifest }: ExtensionContext): string[] {
     const ignored: string[] = []
     // Read .vscodeignore
-    const vscodeIgnorePath = join(cwd, '.vscodeignore')
-    if (existsSync(vscodeIgnorePath)) {
-        for (const line of readFileSync(vscodeIgnorePath, 'utf-8').split(/\r?\n/g)) {
+    const ignoreFile = join(cwd, '.vscodeignore')
+    if (existsSync(ignoreFile)) {
+        for (const line of readFileSync(ignoreFile, 'utf-8').split(/\r?\n/g)) {
             if (line.trim()) ignored.push(line)
         }
     }
     // Exclude dev dependencies: https://code.visualstudio.com/api/working-with-extensions/publishing-extension#using-.vscodeignore
-    ignored.push(
-        ...Object.keys(manifest.devDependencies ?? {}).map(dep => `node_modules/${dep}/`)
-    )
+    for (const dep in manifest.devDependencies) {
+        ignored.push(`node_modules/${dep}/**`)
+    }
     return ignored
 }
 
+/** Parses a VSCode extension manifest (`package.json`). JSONC is supported. */
 export function parseExtensionManifest(s: string): ManifestPackage {
-    return JSONC.parse(s) as ManifestPackage
+    return parseJSONC(s) as ManifestPackage
     // TODO: Validate the package.json based on:
     // https://github.com/microsoft/vscode-vsce/blob/main/src/package.ts#L1313
 }
