@@ -1,13 +1,15 @@
 import {
     ExtensionContext,
+    getDefaultVSIXName,
     getExtensionFiles,
     parseExtensionManifest,
-} from '#lib/api/vsix'
+    writeVSIX,
+} from '#lib/api/vsix.ts'
 import { spawn } from 'node:child_process'
-import { readFileSync } from 'node:fs'
+import { existsSync, readFileSync, statSync } from 'node:fs'
 import { join } from 'node:path'
 import { styleText } from 'node:util'
-import { bold, cyan } from './utils/cli.ts'
+import { bold, cyan, green } from './utils/cli.ts'
 
 function getExtensionContext(dir?: string): ExtensionContext {
     const cwd = dir || process.cwd()
@@ -17,22 +19,54 @@ function getExtensionContext(dir?: string): ExtensionContext {
     return { cwd, manifest }
 }
 
-export function runPack() {}
+interface PackOptions {
+    output?: string
+}
 
-export function runInstall() {}
+export const packOptions = [
+    ['-o, --output <path>', 'File or folder to write the .vsix to', undefined],
+] satisfies [string, string, any][]
 
-export async function runListFiles(dir: string | undefined, { text }: { text: boolean }) {
+export async function runPack(dir: string | undefined, opts: PackOptions) {
     const ctx = getExtensionContext(dir)
     const { cwd } = ctx
     const files = getExtensionFiles(ctx)
-    const stripDot = (path: string) => path.replace(/^\.[\\/]/, '')
+
+    showFiles(cwd, files)
+
+    const isDirOutput =
+        opts.output && existsSync(opts.output) && statSync(opts.output).isDirectory()
+    const vsixPath =
+        !opts.output || isDirOutput
+            ? join(opts.output || cwd, getDefaultVSIXName(ctx.manifest))
+            : opts.output
+
+    await writeVSIX(ctx, vsixPath, files)
+    console.log(
+        green('\nSuccessfully packaged extension to'),
+        cyan(vsixPath) + green('!')
+    )
+}
+
+const stripDot = (path: string) => path.replace(/^\.[\\/]/, '')
+
+export async function runListFiles(dir: string | undefined, { text }: { text: boolean }) {
+    const ctx = getExtensionContext(dir)
+    const files = getExtensionFiles(ctx)
 
     // Print plain text
     if (text) {
         console.log(files.sort().map(stripDot).join('\n'))
         return
     }
+    // Show a tree
+    showFiles(ctx.cwd, files)
+}
 
+/**
+ * Prints a tree of `files` to the console
+ */
+async function showFiles(cwd: string, files: string[]) {
     console.log(
         bold('Extension files in'),
         styleText(['bold', 'magenta'], cwd) + bold(':')
@@ -58,3 +92,5 @@ export async function runListFiles(dir: string | undefined, { text }: { text: bo
         }
     })
 }
+
+export function runInstall() {}

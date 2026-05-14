@@ -4,7 +4,7 @@ import { program } from 'commander'
 import { runNew } from './new.ts'
 import { runAdd } from './add.ts'
 import { runRun } from './run.ts'
-import { runInstall, runPack, runListFiles } from './pack.ts'
+import { runInstall, runPack, runListFiles, packOptions } from './pack.ts'
 
 const vsxtoolsCommands: {
     name: string
@@ -27,10 +27,11 @@ const vsxtoolsCommands: {
         options: [['--overwrite', 'Overwrite files if they exist', false]],
     },
     {
-        name: 'pack',
+        name: 'pack [dir]',
         description: 'Package an extension',
         action: runPack,
         aliases: ['package'],
+        options: packOptions,
     },
     {
         name: 'install',

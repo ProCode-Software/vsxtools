@@ -1,0 +1,53 @@
+/**
+ * Files that are ignored by default, unless overridden
+ * Derived from: https://github.com/microsoft/vscode-vsce/blob/4699582ee0950c9c614aa54888811aa108c1ab1a/src/package.ts#L1633
+ */
+export const defaultIgnore = [
+    'vsxtools.config.ts',
+    'vsxtools.config.js',
+    '.vscodeignore',
+
+    // Package manager files
+    'package-lock.json',
+    'yarn.lock',
+    'yarn-error.log',
+    'npm-debug.log',
+    'npm-shrinkwrap.json',
+    'bun.lock',
+    'bun.lockb',
+    '.npmrc',
+    '.yarnrc',
+    '.bunrc',
+    'pnpm-lock.yaml',
+    'pnpm-workspace.yaml',
+
+    'tsconfig*.json',
+    '.editorconfig',
+    '.gitattributes',
+    '*.todo',
+    'tslint.yaml',
+    '.eslintrc*',
+    '.babelrc*',
+    '.prettierrc*',
+    '.oxfmtrc*',
+    '.cz-config.js',
+    '.commitlintrc*',
+    'webpack.config.js',
+    'vite.config.ts',
+    'vite.config.js',
+    'ISSUE_TEMPLATE.md',
+    'CONTRIBUTING.md',
+    'PULL_REQUEST_TEMPLATE.md',
+    'CODE_OF_CONDUCT.md',
+    '.github',
+    '.travis.yml',
+    'appveyor.yml',
+    '**/.git',
+    '**/.git/**',
+    '**/*.vsix',
+    '**/.DS_Store',
+    '**/*.vsixmanifest',
+    '**/.vscode-test/**',
+    '**/.vscode-test-web/**',
+    '.env',
+]

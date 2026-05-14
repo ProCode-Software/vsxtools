@@ -7,6 +7,7 @@
     "scripts": {
         "build": "bun run ./scripts/syncVendored.ts && bun tsgo",
         "start": "bun run ./src/cli/vsxtools.ts",
+        "vsxtools": "bun run ./src/cli/vsxtools.ts",
         "dev": "bun tsgo --watch",
         "check": "bun tsgo --noEmit"
     },
@@ -31,7 +32,8 @@
         }
     },
     "imports": {
-        "#lib/*": "./dist/lib/*.js",
+        "#lib/*.ts": "./src/lib/*.ts",
+        "#lib/*.js": "./dist/lib/*.js",
         "#vendor/*": "./dist/vendor/*",
         "#/*": "./dist/*"
     },
@@ -55,6 +57,7 @@
         "commander": "^14.0.3"
     },
     "devDependencies": {
+        "@types/adm-zip": "^0.5.8",
         "@types/bun": "^1.3.14",
         "@types/node": "^25.7.0",
         "@typescript/native-preview": "latest",

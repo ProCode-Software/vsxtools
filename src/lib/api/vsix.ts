@@ -1,7 +1,9 @@
 import type { ManifestPackage } from '#vendor/manifest.js'
 import { existsSync, globSync, readFileSync, statSync } from 'node:fs'
-import { join } from 'node:path'
+import { basename, dirname, join } from 'node:path'
 import { parseJSONC } from '../../cli/utils/jsonc.ts'
+import { defaultIgnore } from '#vendor/ignore.js'
+import AdmZip from 'adm-zip'
 
 export interface ExtensionContext {
     manifest: ManifestPackage
@@ -30,11 +32,12 @@ export function getExtensionFiles(ctx: ExtensionContext): string[] {
         }
         return true
     })
+    exclude.push(...defaultIgnore)
 
-    for (const pattern of manifest.files ?? ['./**']) {
+    for (const pattern of manifest.files ?? ['**']) {
         collectFiles(globSync(pattern, { cwd, exclude }))
         // In case `pattern` is a directory
-        collectFiles(globSync(pattern + '/**', { cwd, exclude }))
+        // collectFiles(globSync(pattern + '/**', { cwd, exclude }))
     }
 
     // Include files
@@ -77,4 +80,24 @@ export function parseExtensionManifest(s: string): ManifestPackage {
     return parseJSONC(s) as ManifestPackage
     // TODO: Validate the package.json based on:
     // https://github.com/microsoft/vscode-vsce/blob/main/src/package.ts#L1313
+}
+
+export function getDefaultVSIXName({ name, version }: ManifestPackage): string {
+    return `${name}-${version}.vsix`
+}
+
+export async function writeVSIX(
+    ctx: ExtensionContext,
+    outputPath: string,
+    files: string[]
+) {
+    const zip = new AdmZip()
+    for (const file of files) {
+        zip.addLocalFile(
+            join(ctx.cwd, file),
+            join('extension', dirname(file)),
+            basename(file)
+        )
+    }
+    await zip.writeZipPromise(outputPath, { overwrite: true })
 }
