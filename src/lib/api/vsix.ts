@@ -1,26 +1,22 @@
+import { defaultIgnore } from '#vendor/ignore.js'
 import type { ManifestPackage } from '#vendor/manifest.js'
-import { existsSync, globSync, readFileSync, statSync } from 'node:fs'
+import AdmZip from 'adm-zip'
+import { globSync, statSync } from 'node:fs'
 import { basename, dirname, join } from 'node:path'
 import { parseJSONC } from '../../cli/utils/jsonc.ts'
-import { defaultIgnore } from '#vendor/ignore.js'
-import AdmZip from 'adm-zip'
-
-export interface ExtensionContext {
-    manifest: ManifestPackage
-    cwd: string
-}
+import type { Extension } from './extension.ts'
 
 /**
  * Returns the files included in the extension, as defined by `ctx.manifest.files` and `.vscodeignore`
  */
-export function getExtensionFiles(ctx: ExtensionContext): string[] {
-    const { cwd, manifest } = ctx
+export function getExtensionFiles(ext: Extension): string[] {
+    const { cwd, manifest } = ext
     const files: Set<string> = new Set()
 
     // globSync.exclude doesn't support `!...` patterns.
     // Move them into their own array that is included manually.
     const include: string[] = []
-    const exclude = getIgnoredFiles(ctx).filter(pat => {
+    const exclude = ext.getIgnorePatterns().filter(pat => {
         let count = 0
         for (const x of pat) {
             if (x != '!') break
@@ -54,27 +50,6 @@ export function getExtensionFiles(ctx: ExtensionContext): string[] {
     return Array.from(files)
 }
 
-/**
- * Returns the patterns of ignored files as defined by `.vscodeignore`
- * and the manifest's `devDependencies`
- * @see https://code.visualstudio.com/api/working-with-extensions/publishing-extension#using-.vscodeignore
- */
-export function getIgnoredFiles({ cwd, manifest }: ExtensionContext): string[] {
-    const ignored: string[] = []
-    // Read .vscodeignore
-    const ignoreFile = join(cwd, '.vscodeignore')
-    if (existsSync(ignoreFile)) {
-        for (const line of readFileSync(ignoreFile, 'utf-8').split(/\r?\n/g)) {
-            if (line.trim()) ignored.push(line)
-        }
-    }
-    // Exclude dev dependencies: https://code.visualstudio.com/api/working-with-extensions/publishing-extension#using-.vscodeignore
-    for (const dep in manifest.devDependencies) {
-        ignored.push(`node_modules/${dep}/**`)
-    }
-    return ignored
-}
-
 /** Parses a VSCode extension manifest (`package.json`). JSONC is supported. */
 export function parseExtensionManifest(s: string): ManifestPackage {
     return parseJSONC(s) as ManifestPackage
@@ -82,22 +57,15 @@ export function parseExtensionManifest(s: string): ManifestPackage {
     // https://github.com/microsoft/vscode-vsce/blob/main/src/package.ts#L1313
 }
 
-export function getDefaultVSIXName({ name, version }: ManifestPackage): string {
-    return `${name}-${version}.vsix`
-}
-
-export async function writeVSIX(
-    ctx: ExtensionContext,
-    outputPath: string,
-    files: string[]
-) {
+/** Bundles the extension's files into a .vsix package */
+export async function writeVSIX(ext: Extension, outPath: string) {
     const zip = new AdmZip()
-    for (const file of files) {
+    for (const file of ext.getFiles()) {
         zip.addLocalFile(
-            join(ctx.cwd, file),
+            join(ext.cwd, file),
             join('extension', dirname(file)),
             basename(file)
         )
     }
-    await zip.writeZipPromise(outputPath, { overwrite: true })
+    await zip.writeZipPromise(outPath, { overwrite: true })
 }

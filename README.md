@@ -34,21 +34,21 @@ For documentation, see the [GitHub wiki](https://github.com/ProCode-Software/vsx
 vsxtools can be configured using a `vsxtools.config.ts/js` file in your extension folder.
 
 ```typescript
-import { defineConfig } from "vsxtools";
+import { defineConfig } from 'vsxtools'
 
 export default defineConfig({
-  configurations: {
-    // Create a color theme with vsxtools
-    default: {
-      type: "color-theme",
-      inputs: ["./src/my-color-theme.json"],
-      outputDir: "./themes",
-      name: "My Theme",
-      id: "my-theme",
+    configurations: {
+        // Create a color theme with vsxtools
+        default: {
+            type: 'color-theme',
+            inputs: ['./src/my-color-theme.json'],
+            outputDir: './themes',
+            name: 'My Theme',
+            id: 'my-theme',
+        },
+        // More configurations can be added here...
     },
-    // More configurations can be added here...
-  },
-});
+})
 ```
 
 To run a specific configuration, run:
