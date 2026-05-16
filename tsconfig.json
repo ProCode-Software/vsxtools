@@ -27,7 +27,7 @@
         "erasableSyntaxOnly": true,
         "allowJs": true,
         "strictNullChecks": true,
-        "verbatimModuleSyntax": true,
+        "verbatimModuleSyntax": true
     },
     "include": ["./src"]
 }
