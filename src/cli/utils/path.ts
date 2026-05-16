@@ -1,7 +1,7 @@
-import { type Product } from '#lib/vsxtools/vsxtools.ts'
 import { error } from 'console'
 import { join, parse } from 'path'
 import { green } from './cli.ts'
+import { type Product } from '#lib/vsxtools/vsxtools.ts'
 
 export type Resolver = (path: string) => string
 

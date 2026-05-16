@@ -1,7 +1,7 @@
-import type { ManifestPackage } from '#/vendor/manifest.ts'
 import { existsSync, readFileSync } from 'node:fs'
 import { join } from 'node:path'
 import { getExtensionFiles, parseExtensionManifest, writeVSIX } from './vsix.ts'
+import type { ManifestPackage } from '#/vendor/manifest.ts'
 
 export class Extension {
     public cwd: string

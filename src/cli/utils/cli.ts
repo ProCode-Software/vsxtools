@@ -26,5 +26,6 @@ export function error(text: string, exit: boolean = true) {
 }
 
 export interface RunContext extends ResolvedConfig {
+    /** The product being run */
     product: Product
 }

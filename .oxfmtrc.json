@@ -9,5 +9,18 @@
     "useTabs": false,
     "sortPackageJson": false,
     "ignorePatterns": [],
-    "insertFinalNewline": true
+    "insertFinalNewline": true,
+    "sortImports": {
+        "newlinesBetween": false,
+        "partitionByComment": true,
+        "partitionByNewline": true,
+        "groups": [
+            "wildcard-import",
+            "default-import",
+            ["builtin", "external"],
+            ["parent", "sibling", "index"],
+            ["internal", "subpath"],
+            "type"
+        ]
+    }
 }

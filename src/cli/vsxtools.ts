@@ -1,10 +1,9 @@
 #!/usr/bin/env node
 import { program } from 'commander'
-
-import { runNew } from './new.ts'
 import { runAdd } from './add.ts'
-import { runRun } from './run.ts'
+import { runNew } from './new.ts'
 import { runInstall, runPack, runListFiles, packOptions } from './pack.ts'
+import { runRun } from './run.ts'
 
 const vsxtoolsCommands: {
     name: string

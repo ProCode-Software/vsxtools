@@ -1,9 +1,9 @@
-import { defaultIgnore } from '#/vendor/ignore.ts'
-import type { ManifestPackage } from '#/vendor/manifest.ts'
 import AdmZip from 'adm-zip'
 import { globSync, statSync } from 'node:fs'
 import { basename, dirname, join } from 'node:path'
 import { parseJSONC } from '../../cli/utils/jsonc.ts'
+import { defaultIgnore } from '#/vendor/ignore.ts'
+import type { ManifestPackage } from '#/vendor/manifest.ts'
 import type { Extension } from './extension.ts'
 
 /**

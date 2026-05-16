@@ -1,10 +1,10 @@
-import { Extension } from '#lib/api/extension.ts'
-import { getExtensionFiles } from '#lib/api/vsix.ts'
 import { spawn } from 'node:child_process'
 import { existsSync, statSync } from 'node:fs'
 import { join } from 'node:path'
 import { styleText } from 'node:util'
 import { bold, cyan, green } from './utils/cli.ts'
+import { Extension } from '#lib/api/extension.ts'
+import { getExtensionFiles } from '#lib/api/vsix.ts'
 
 interface PackOptions {
     output?: string
