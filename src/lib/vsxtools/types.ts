@@ -12,12 +12,18 @@ export interface ExtensionConfig {
 
 export type ExtensionManifest = ManifestPackage
 
+// Products
+// =========
+
 export type ProductType =
     | 'color-theme'
     | 'product-icons'
     | 'keymap'
     | 'language'
     | 'extension'
+
+// TODO: update with more product types
+export type ProductConfig = ColorThemeConfig | ProductIconThemeConfig
 
 export type Product = {
     type: ProductType
@@ -26,7 +32,7 @@ export type Product = {
     outputFile?: string
     id?: string
     name?: string
-} & (ColorThemeConfig | ProductIconThemeConfig | {}) // TODO: update with more product types
+} & (ProductConfig | {})
 
 export interface ColorThemeConfig {
     type: 'color-theme'
@@ -48,12 +54,10 @@ export interface ProductIconThemeConfig {
 // =========
 
 /** Configuration for an existing font */
-export interface FontConfig {
-    id?: string
-    fontFile: string
-    codepointsPath?: string
-    codepoints?: Record<string, string>
-}
+export type FontConfig = { id?: string; fontFile: string } & (
+    | { codepointsPath?: string }
+    | { codepoints?: Record<string, string> }
+)
 
 /** Configuration for a new font created from existing SVG files */
 export interface SVGFontConfig {

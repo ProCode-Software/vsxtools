@@ -42,7 +42,7 @@ export type PatternOtherTypes =
     | BeginEndPattern
     | {}
 
-export type TextMateLanguage = {
+export interface TextMateLanguage {
     $schema?: string
     name?: string
     scopeName: string
