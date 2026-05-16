@@ -1,4 +1,4 @@
-import { ManifestPackage } from '#vendor/manifest.js'
+import type { ManifestPackage } from '#/vendor/manifest.ts'
 
 export interface ExtensionConfig {
     configurations: Record<string, Product>

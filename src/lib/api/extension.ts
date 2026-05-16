@@ -1,4 +1,4 @@
-import { ManifestPackage } from '#vendor/manifest.js'
+import type { ManifestPackage } from '#/vendor/manifest.ts'
 import { existsSync, readFileSync } from 'node:fs'
 import { join } from 'node:path'
 import { getExtensionFiles, parseExtensionManifest, writeVSIX } from './vsix.ts'

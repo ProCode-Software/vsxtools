@@ -1,7 +1,7 @@
 import { resolveConfig } from './config.ts'
 import * as colorTheme from './runners/colorTheme.ts'
 import * as language from './runners/language.ts'
-import { error, RunContext } from './utils/cli.ts'
+import { error, type RunContext } from './utils/cli.ts'
 
 export async function runRun(item: string = 'default') {
     const { config, resolve } = await resolveConfig()

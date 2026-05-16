@@ -26,9 +26,8 @@
         "noPropertyAccessFromIndexSignature": true,
         "erasableSyntaxOnly": true,
         "allowJs": true,
-        "checkJs": true,
-        "strictNullChecks": true
+        "strictNullChecks": true,
+        "verbatimModuleSyntax": true,
     },
-    "include": ["./src/**/*"],
-    "exclude": ["./types", "node_modules", "**/node_modules"]
+    "include": ["./src"]
 }

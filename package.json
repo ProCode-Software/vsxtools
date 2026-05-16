@@ -34,8 +34,8 @@
     "imports": {
         "#lib/*.ts": "./src/lib/*.ts",
         "#lib/*.js": "./dist/lib/*.js",
-        "#vendor/*": "./dist/vendor/*",
-        "#/*": "./dist/*"
+        "#/*.ts": "./src/*.ts",
+        "#/*.js": "./dist/*.js"
     },
     "homepage": "https://github.com/ProCode-Software/vsxtools",
     "repository": {
@@ -59,7 +59,7 @@
     "devDependencies": {
         "@types/adm-zip": "^0.5.8",
         "@types/bun": "^1.3.14",
-        "@types/node": "^25.7.0",
+        "@types/node": "^25.8.0",
         "@typescript/native-preview": "latest",
         "@vscode/codicons": "latest"
     },

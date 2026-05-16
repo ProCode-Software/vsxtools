@@ -3,7 +3,7 @@ import { writeFile } from 'fs/promises'
 import { basename } from 'path'
 import { workerData } from 'worker_threads'
 import { cyan, dim, green, red, yellow } from '../utils/cli.ts'
-import { GrammarWorkerParams } from './params.ts'
+import { type GrammarWorkerParams } from './params.ts'
 import { generateTextMateGrammar as generateGrammarJSON } from '#lib/api/grammar.ts'
 
 const { outPath, srcPath, watch, indent }: GrammarWorkerParams = workerData

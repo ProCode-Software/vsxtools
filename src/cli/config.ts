@@ -1,4 +1,4 @@
-import { ExtensionConfig } from '#lib/vsxtools/vsxtools.ts'
+import type { ExtensionConfig } from '#lib/vsxtools/vsxtools.ts'
 import { existsSync } from 'fs'
 import { dirname, join } from 'path'
 import { error } from './utils/cli.ts'

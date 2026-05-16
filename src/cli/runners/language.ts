@@ -1,7 +1,7 @@
-import { RunContext } from '../utils/cli.ts'
+import { type RunContext } from '../utils/cli.ts'
 import { getOutFile } from '../utils/path.ts'
 import { Worker } from '../utils/worker.ts'
-import { GrammarWorkerParams } from '../workers/params.ts'
+import { type GrammarWorkerParams } from '../workers/params.ts'
 
 export async function run(ctx: RunContext) {
     const worker = new Worker<GrammarWorkerParams>('Grammar Worker', 'grammarWorker')
