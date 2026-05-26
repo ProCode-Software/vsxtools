@@ -3,7 +3,12 @@ import * as colorTheme from './runners/colorTheme.ts'
 import * as language from './runners/language.ts'
 import { error, type RunContext } from './utils/cli.ts'
 
-export async function runRun(item: string = 'default') {
+interface RunFlags {
+    watch?: boolean
+}
+
+export async function runRun(item: string = 'default', options: RunFlags) {
+    const { watch } = options
     const { config, resolve } = await resolveConfig()
     const product = config.configurations[item]
     if (!product) {
@@ -11,6 +16,7 @@ export async function runRun(item: string = 'default') {
     } else if (!product.inputs || !product.inputs.length) {
         error(`No inputs provided`)
     }
+    if (watch !== undefined) config.watch = watch
     const ctx: RunContext = { config, resolve, product }
 
     switch (product.type) {

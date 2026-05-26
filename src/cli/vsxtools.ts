@@ -19,6 +19,7 @@ const vsxtoolsCommands: {
         description: 'Run a configuration',
         action: runRun,
         aliases: ['r'],
+        options: [['--watch', 'Update when input files change', false]],
     },
     {
         name: 'add <item> [dir]',
@@ -35,7 +36,7 @@ const vsxtoolsCommands: {
     },
     {
         name: 'install',
-        description: 'Package and install an extension',
+        description: 'Package and install an extension in VSCode',
         action: runInstall,
     },
     {
