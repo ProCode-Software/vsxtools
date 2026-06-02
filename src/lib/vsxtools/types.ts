@@ -37,7 +37,7 @@ export type Product<T extends ProductType = ProductType> = {
 export interface ColorThemeConfig {
     type: 'color-theme'
     /** The location of the variable declarations used by the inputs */
-    variables:
+    variables?:
         | {
               /** Path to a file that declares the variables */
               path: string
@@ -53,6 +53,8 @@ export interface ColorThemeConfig {
     /** The prefix to use for variable references */
     variablePrefix?: string
 }
+
+export const defaultVariables = { inline: true }
 
 export interface ProductIconThemeConfig {
     type: 'product-icons'

@@ -6,7 +6,7 @@ export class Worker<T> {
 
     constructor(name: string, file: string) {
         this.name = name
-        this.#url = new URL(`./workers/${file}.js`, import.meta.url)
+        this.#url = new URL(`../workers/${file}.js`, import.meta.url)
     }
 
     run(workerData: T): WorkerThread {

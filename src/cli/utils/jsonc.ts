@@ -12,6 +12,6 @@ async function parseFallback(input: string): Promise<any> {
 
 export { parseJSONC }
 
-export function parseJSONCFile(path: string) {
-    return parseJSONC(readFileSync(path, 'utf-8'))
+export async function parseJSONCFile(path: string) {
+    return await parseJSONC(readFileSync(path, 'utf-8'))
 }

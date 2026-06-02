@@ -1,5 +1,6 @@
 node_modules
 .vscode
+.zed
 dist
 .env
 wiki

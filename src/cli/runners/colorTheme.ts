@@ -14,9 +14,9 @@ export async function run({ resolve, config, product }: RunContext<'color-theme'
             indent: config.jsonIndent,
             variablePrefix: product.variablePrefix,
             sortFile: product.sortFile,
-            ...('path' in product.variables
+            ...(product.variables && 'path' in product.variables
                 ? { variablesFile: resolve(product.variables.path) }
-                : { variablesKey: product.variables.variablesKey }),
+                : { variablesKey: product.variables?.variablesKey }),
         })
     }
 }

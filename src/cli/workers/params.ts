@@ -25,5 +25,5 @@ export const colorThemeDefaults = {
     ...jsonDefaults,
     sortFile: false,
     variablePrefix: '--',
-    variablesKey: 'variables'
+    variablesKey: 'variables',
 } satisfies Partial<ColorThemeWorkerParams>

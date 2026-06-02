@@ -1,8 +1,8 @@
 import { watchFile } from 'node:fs'
 import { writeFile } from 'node:fs/promises'
-import { basename } from 'node:path'
 import { workerData } from 'node:worker_threads'
 import { parseJSONCFile } from '../utils/jsonc.ts'
+import { shortPath } from '../utils/path.ts'
 import * as log from './log.ts'
 import { colorThemeDefaults as defs, type ColorThemeWorkerParams } from './params.ts'
 
@@ -17,8 +17,8 @@ const {
     variablesKey = defs.variablesKey,
 }: ColorThemeWorkerParams = workerData
 
-const shortSrcPath = basename(srcPath)
-const shortOutPath = basename(outPath)
+const shortSrcPath = shortPath(srcPath)
+const shortOutPath = shortPath(outPath)
 
 await update()
 
@@ -31,7 +31,7 @@ if (watch) {
 
 async function update() {
     try {
-        const file: ColorThemeFile & {} = parseJSONCFile(srcPath)
+        const file: ColorThemeFile & {} = await parseJSONCFile(srcPath)
         const vars: Record<string, string> = variablesFile
             ? (await import(`${variablesFile}?t=${Date.now()}`)).default
             : file[variablesKey]
@@ -44,15 +44,19 @@ async function update() {
         if (sortFile) sort(file)
 
         let replaced = JSON.stringify(file, null, indent)
-        // Sort variables by name length so substitutions don't replace
-        // the middle of similarly-named variables.
-        const sortedVars = Object.entries(vars).sort(([a], [b]) => b.length - a.length)
-        for (const [name, value] of sortedVars) {
-            replaced = replaced.replaceAll(variablePrefix + name, value)
+        if (vars) {
+            // Sort variables by name length so substitutions don't replace
+            // the middle of similarly-named variables.
+            const sortedVars = Object.entries(vars).sort(
+                ([a], [b]) => b.length - a.length
+            )
+            for (const [name, value] of sortedVars) {
+                replaced = replaced.replaceAll(variablePrefix + name, value)
+            }
         }
 
         writeFile(outPath, replaced)
-        log.updated(shortOutPath)
+        watch && log.updated(shortOutPath)
     } catch (e) {
         log.readError(shortSrcPath, e)
     }
