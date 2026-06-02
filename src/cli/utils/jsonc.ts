@@ -1,3 +1,5 @@
+import { readFileSync } from 'node:fs'
+
 let parseJSONC: (input: string) => any = await import('bun')
     .then(({ JSONC }) => JSONC.parse)
     .catch(() => parseFallback)
@@ -9,3 +11,7 @@ async function parseFallback(input: string): Promise<any> {
 }
 
 export { parseJSONC }
+
+export function parseJSONCFile(path: string) {
+    return parseJSONC(readFileSync(path, 'utf-8'))
+}

@@ -1,6 +1,6 @@
 import { styleText, type InspectColor } from 'util'
 import { type ResolvedConfig } from '../config.ts'
-import type { Product } from '#lib/vsxtools/types.ts'
+import type { Product, ProductType } from '#lib/vsxtools/types.ts'
 
 export const styled = (color: InspectColor | InspectColor[], text: string) =>
     styleText(color, text, { validateStream: false })
@@ -20,12 +20,14 @@ export function success(text: string) {
     console.log(green(text))
 }
 
+export function error(text: string, exit?: true): never
+export function error(text: string, exit: false): void
 export function error(text: string, exit: boolean = true) {
     console.log(red(text))
     if (exit) process.exit(1)
 }
 
-export interface RunContext extends ResolvedConfig {
+export interface RunContext<T extends ProductType = ProductType> extends ResolvedConfig {
     /** The product being run */
-    product: Product
+    product: Product<T>
 }

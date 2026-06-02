@@ -1,6 +1,6 @@
 import { existsSync, readFileSync } from 'node:fs'
 import { join } from 'node:path'
-import { getExtensionFiles, parseExtensionManifest, writeVSIX } from './vsix.ts'
+import { getExtensionFiles, parseManifest, writeVSIX } from './vsix.ts'
 import type { ManifestPackage } from '#/vendor/manifest.ts'
 
 export class Extension {
@@ -10,9 +10,7 @@ export class Extension {
 
     public constructor(cwd: string) {
         this.cwd = cwd
-        this.manifest = parseExtensionManifest(
-            readFileSync(join(cwd, 'package.json'), 'utf-8')
-        )
+        this.manifest = parseManifest(readFileSync(join(cwd, 'package.json'), 'utf-8'))
     }
 
     /**

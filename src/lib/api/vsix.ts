@@ -51,7 +51,7 @@ export function getExtensionFiles(ext: Extension): string[] {
 }
 
 /** Parses a VSCode extension manifest (`package.json`). JSONC is supported. */
-export function parseExtensionManifest(s: string): ManifestPackage {
+export function parseManifest(s: string): ManifestPackage {
     return parseJSONC(s) as ManifestPackage
     // TODO: Validate the package.json based on:
     // https://github.com/microsoft/vscode-vsce/blob/main/src/package.ts#L1313
