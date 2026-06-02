@@ -2,7 +2,7 @@ import { readdirSync, statSync } from 'fs'
 import { relative } from 'node:path'
 import { join, parse } from 'path'
 import * as cli from './cli.ts'
-import { type Product } from '#lib/vsxtools/vsxtools.ts'
+import type { Product } from '#lib/vsxtools/vsxtools.ts'
 
 export type Resolver = (path: string) => string
 

@@ -1,6 +1,6 @@
 import { styleText, type InspectColor } from 'util'
-import { type ResolvedConfig } from '../config.ts'
 import type { Product, ProductType } from '#lib/vsxtools/types.ts'
+import type { ResolvedConfig } from '../config.ts'
 
 export const styled = (color: InspectColor | InspectColor[], text: string) =>
     styleText(color, text, { validateStream: false })

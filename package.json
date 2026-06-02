@@ -1,6 +1,6 @@
 {
     "name": "vsxtools",
-    "version": "0.2.0",
+    "version": "0.2.1",
     "description": "Developer tools for building VSCode extensions",
     "type": "module",
     "main": "dist/lib/vsxtools/vsxtools.js",
@@ -9,7 +9,8 @@
         "start": "bun run ./src/cli/vsxtools.ts",
         "vsxtools": "bun run ./src/cli/vsxtools.ts",
         "dev": "bun tsgo --watch",
-        "check": "bun tsgo --noEmit"
+        "check": "bun tsgo --noEmit",
+        "prepare": "bun run build"
     },
     "license": "MIT",
     "author": "ProCode Software",

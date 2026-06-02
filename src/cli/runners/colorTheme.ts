@@ -1,7 +1,7 @@
 import { type RunContext } from '../utils/cli.ts'
 import { ioPairs } from '../utils/path.ts'
 import { Worker } from '../utils/worker.ts'
-import { type ColorThemeWorkerParams } from '../workers/params.ts'
+import type { ColorThemeWorkerParams } from '../workers/params.ts'
 
 export async function run({ resolve, config, product }: RunContext<'color-theme'>) {
     const worker = new Worker<ColorThemeWorkerParams>('Color Theme', 'colorTheme')
