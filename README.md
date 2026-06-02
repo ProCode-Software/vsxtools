@@ -71,13 +71,11 @@ You don't even need a configuration. Just run `vsxtools` in your current directo
 npx vsxtools pack
 ```
 
-<!--
+
 ## Used in
 
-vsxtools is already being used in my personal projects
+vsxtools is already being used in my personal projects, including [my VSCode themes](https://github.com/ProCode-Software/vscode-themes)
 
-- [my VSCode themes](https://github.com/ProCode-Software/vscode-themes)
--->
 
 ## 🗺 Roadmap
 
