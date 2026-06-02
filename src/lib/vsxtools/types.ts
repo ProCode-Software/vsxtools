@@ -1,6 +1,6 @@
 import type { ManifestPackage } from '#/vendor/manifest.ts'
 
-export interface ExtensionConfig {
+export interface Config {
     configurations: Record<string, Product>
     manifest?: ExtensionManifest
     watch?: boolean
@@ -23,20 +23,35 @@ export type ProductType =
     | 'extension'
 
 // TODO: update with more product types
-export type ProductConfig = ColorThemeConfig | ProductIconThemeConfig
+export type ProductConfig = ColorThemeConfig | ProductIconThemeConfig | LanguageConfig
 
-export type Product = {
-    type: ProductType
-    inputs: string[]
+export type Product<T extends ProductType = ProductType> = {
+    type: T
+    inputs: string | string[]
     outputDir?: string
-    outputFile?: string
+    outputFile?: string | string[]
     id?: string
     name?: string
-} & (ProductConfig | {})
+} & Extract<ProductConfig, { type: T }>
 
 export interface ColorThemeConfig {
     type: 'color-theme'
-    variables: { path: string } | { inline: boolean }
+    /** The location of the variable declarations used by the inputs */
+    variables:
+        | {
+              /** Path to a file that declares the variables */
+              path: string
+          }
+        | {
+              /** The variables are declared in the input JSON */
+              inline: true
+              /** The key in the input JSON where the variables are declared */
+              variablesKey?: string
+          }
+    /** Whether to sort the generated file */
+    sortFile?: boolean
+    /** The prefix to use for variable references */
+    variablePrefix?: string
 }
 
 export interface ProductIconThemeConfig {
@@ -48,6 +63,10 @@ export interface ProductIconThemeConfig {
      * The first font defined in the `fonts` property gets the highest priority.
      * */
     importExistingIconNames: boolean | string[]
+}
+
+export interface LanguageConfig {
+    type: 'language'
 }
 
 // Fonts

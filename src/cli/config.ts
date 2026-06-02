@@ -1,11 +1,11 @@
 import { existsSync } from 'fs'
-import { dirname, join } from 'path'
+import { dirname, join, resolve } from 'path'
 import { error } from './utils/cli.ts'
-import type { ExtensionConfig } from '#lib/vsxtools/vsxtools.ts'
+import type { Config } from '#lib/vsxtools/vsxtools.ts'
 
 export interface ResolvedConfig {
     /** The resolved configuration */
-    config: ExtensionConfig
+    config: Config
     /** Resolves a path relative to the configuration file */
     resolve(path: string): string
 }
@@ -19,7 +19,7 @@ export async function resolveConfig(
     const makeResolved = async (path: string): Promise<ResolvedConfig> => {
         const { default: config = error(`Invalid configuration in '${path}'`) } =
             await import(path)
-        return { config, resolve: (file: string) => join(currentDir, file) }
+        return { config, resolve: (file: string) => resolve(currentDir, file) }
     }
     while (true) {
         let baseConfigPath = join(currentDir, 'vsxtools.config')
@@ -39,5 +39,4 @@ export async function resolveConfig(
     error(
         `Couldn't find 'vsxtools.config.js' or 'vsxtools.config.ts' in the current directory or any parent directory`
     )
-    process.exit(1)
 }
