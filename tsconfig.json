@@ -5,6 +5,7 @@
         "rootDir": "./src",
         "outDir": "./dist",
         "module": "nodenext",
+        "moduleResolution": "nodenext",
         "target": "esnext",
         "lib": ["esnext"],
         "types": ["node", "bun"],
@@ -16,10 +17,9 @@
         "noFallthroughCasesInSwitch": true,
         "noImplicitAny": false,
         "noUnusedParameters": false,
-
-        // Recommended Options
         "strict": true,
         "isolatedModules": true,
+        "allowUnusedLabels": false,
         "noUncheckedSideEffectImports": true,
         "moduleDetection": "force",
         "skipLibCheck": true,
@@ -27,7 +27,8 @@
         "erasableSyntaxOnly": true,
         "allowJs": true,
         "strictNullChecks": true,
-        "verbatimModuleSyntax": true
+        "verbatimModuleSyntax": true,
+        "allowUnreachableCode": false,
     },
-    "include": ["./src"]
+    "include": ["./src"],
 }

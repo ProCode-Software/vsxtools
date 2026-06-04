@@ -9,12 +9,13 @@ export function runAdd(
     dir: string = cwd(),
     { overwrite }: { overwrite: boolean }
 ) {
-    console.log(kind, dir)
     switch (kind.toLowerCase()) {
         case 'prettier':
         case 'prettier-config':
             addPrettier(dir, overwrite)
             break
+        default:
+            error(`Unknown item kind '${kind}'`)
     }
 }
 
@@ -23,7 +24,6 @@ function checkIfExists(file: string, overwrite: boolean): boolean {
         error(
             `Output file '${file}' already exists. Use '--overwrite' to replace this file.`
         )
-        return false
     }
     return true
 }
