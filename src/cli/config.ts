@@ -22,11 +22,11 @@ export async function resolveConfig(
         return { config, resolve: (file: string) => resolve(currentDir, file) }
     }
     while (true) {
-        let baseConfigPath = join(currentDir, 'vsxtools.config')
+        const baseConfigPath = join(currentDir, 'vsxtools.config')
         let configPath: string
         if (
-            existsSync((configPath = baseConfigPath + '.ts')) ||
-            existsSync((configPath = baseConfigPath + '.js'))
+            existsSync((configPath = `${baseConfigPath}.ts`)) ||
+            existsSync((configPath = `${baseConfigPath}.js`))
         ) {
             return await makeResolved(configPath)
         }
