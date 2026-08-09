@@ -1,11 +1,11 @@
 import { readFileSync } from 'node:fs'
+import stripComments from '../../vendor/jsonc.js'
 
 let parseJSONC: (input: string) => any = await import('bun')
     .then(({ JSONC }) => JSONC.parse)
     .catch(() => parseFallback)
 
-async function parseFallback(input: string): Promise<any> {
-    const { default: stripComments } = await import('../../vendor/jsonc.js')
+function parseFallback(input: string): any {
     input = stripComments(input, { trailingCommas: true, whitespace: false })
     return JSON.parse(input)
 }

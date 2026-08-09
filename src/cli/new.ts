@@ -1,9 +1,9 @@
 import { confirm, intro, isCancel, outro, select, spinner, text } from '@clack/prompts'
 import path from 'node:path'
+import { setTimeout } from 'node:timers/promises'
 import { styleText } from 'node:util'
 import { cyan, green, magenta, red, yellow } from './utils/cli.ts'
 import type { ProductType } from '#lib/vsxtools/types.ts'
-import { setTimeout } from 'node:timers/promises';
 
 interface ExtensionInfo {
     dir: string
@@ -163,13 +163,9 @@ export async function runNew(dir: string | undefined) {
                 break
         }
     }
-    
+
     const s = spinner()
-    s.start(
-        magenta(
-            `Creating your project at ${cyan(extensionInfo.dir)}`
-        )
-    )
+    s.start(magenta(`Creating your project at ${cyan(extensionInfo.dir)}`))
     const configPath = await generateProject(extensionInfo)
     s.stop(styleText('greenBright', 'Project created!'))
     outro(
@@ -191,7 +187,7 @@ async function handleCancel<T>(value: Promise<T | symbol>): Promise<Awaited<T>> 
 async function generateProject({
     dir,
     scriptExt,
-    ...info
+    ..._info
 }: ExtensionInfo): Promise<string> {
     const configPath = path.join(dir, `vsxtools.config.${scriptExt()}`)
     await setTimeout(5000)

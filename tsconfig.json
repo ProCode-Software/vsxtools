@@ -28,7 +28,7 @@
         "allowJs": true,
         "strictNullChecks": true,
         "verbatimModuleSyntax": true,
-        "allowUnreachableCode": false,
+        "allowUnreachableCode": false
     },
-    "include": ["./src"],
+    "include": ["./src"]
 }
