@@ -3,6 +3,11 @@ name: Publish to npm
 on:
     release:
         types: [created]
+    workflow_dispatch:
+        inputs:
+            version:
+                required: true
+                type: string
 
 jobs:
     build:
@@ -35,6 +40,10 @@ jobs:
               with:
                   name: dist-files
                   path: dist/
+
+            - name: Increment Version
+              run: bun pm version ${{github.event.inputs.version || inputs.version}}
+
             - run: bun publish
               env:
                   NODE_AUTH_TOKEN: ${{secrets.npm_token}}
