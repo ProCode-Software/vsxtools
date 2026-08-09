@@ -9,8 +9,7 @@
         "start": "bun run ./src/cli/vsxtools.ts",
         "vsxtools": "bun run ./src/cli/vsxtools.ts",
         "dev": "bun tsc --watch",
-        "check": "bun tsc --noEmit",
-        "prepare": "bun run build"
+        "check": "bun tsc --noEmit"
     },
     "license": "MIT",
     "author": "ProCode Software",
