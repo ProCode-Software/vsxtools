@@ -1,15 +1,15 @@
 {
     "name": "vsxtools",
-    "version": "0.2.1",
+    "version": "0.0.3",
     "description": "Developer tools for building VSCode extensions",
     "type": "module",
     "main": "dist/lib/vsxtools/vsxtools.js",
     "scripts": {
-        "build": "bun run ./scripts/syncVendored.ts && bun tsgo",
+        "build": "bun run ./scripts/syncVendored.ts && bun tsc",
         "start": "bun run ./src/cli/vsxtools.ts",
         "vsxtools": "bun run ./src/cli/vsxtools.ts",
-        "dev": "bun tsgo --watch",
-        "check": "bun tsgo --noEmit",
+        "dev": "bun tsc --watch",
+        "check": "bun tsc --noEmit",
         "prepare": "bun run build"
     },
     "license": "MIT",
@@ -53,15 +53,15 @@
         "vscode-extension"
     ],
     "dependencies": {
-        "@clack/prompts": "^1.5.1",
-        "adm-zip": "^0.5.17",
+        "@clack/prompts": "^1.7.0",
+        "adm-zip": "^0.5.18",
         "commander": "^15.0.0"
     },
     "devDependencies": {
         "@types/adm-zip": "^0.5.8",
         "@types/bun": "^1.3.14",
         "@types/node": "latest",
-        "@typescript/native-preview": "latest",
+        "typescript": "^7.0.2",
         "@vscode/codicons": "latest"
     },
     "optionalDependencies": {
