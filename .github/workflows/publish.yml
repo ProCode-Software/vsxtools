@@ -42,7 +42,7 @@ jobs:
                   path: dist/
 
             - name: Increment Version
-              run: bun pm version ${{github.event.inputs.version || inputs.version}}
+              run: bun pm version ${{github.event.inputs.version || inputs.version}} --no-git-tag-version -f
 
             - run: bun publish
               env:
