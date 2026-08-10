@@ -48,4 +48,5 @@ jobs:
             - name: Increment Version
               run: bun pm version ${{github.event.inputs.version || inputs.version}} --no-git-tag-version -f
 
-            - run: npm publish
+            - run: bunx npm login
+            - run: bun publish
