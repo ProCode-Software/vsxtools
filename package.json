@@ -1,6 +1,6 @@
 {
     "name": "vsxtools",
-    "version": "0.2.2",
+    "version": "0.2.3",
     "description": "Developer tools for building VSCode extensions",
     "type": "module",
     "main": "dist/lib/vsxtools/vsxtools.js",
@@ -32,10 +32,14 @@
         }
     },
     "imports": {
-        "#lib/*.ts": "./src/lib/*.ts",
-        "#lib/*.js": "./dist/lib/*.js",
-        "#/*.ts": "./src/*.ts",
-        "#/*.js": "./dist/*.js"
+        "#lib/*.ts": {
+            "types": "./src/lib/*.ts",
+            "default": "./dist/lib/*.js"
+        },
+        "#/*.ts": {
+            "types": "./src/*.ts",
+            "default": "./dist/*.js"
+        }
     },
     "homepage": "https://github.com/ProCode-Software/vsxtools",
     "repository": {
@@ -58,7 +62,7 @@
     },
     "devDependencies": {
         "@types/adm-zip": "^0.5.8",
-        "@types/bun": "^1.3.14",
+        "@types/bun": "^1.4.0",
         "@types/node": "latest",
         "typescript": "^7.0.2",
         "@vscode/codicons": "latest"
