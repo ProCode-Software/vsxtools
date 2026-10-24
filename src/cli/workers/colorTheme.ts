@@ -1,6 +1,7 @@
 import { watchFile } from 'node:fs'
-import { writeFile } from 'node:fs/promises'
+import { writeFile, mkdir } from 'node:fs/promises'
 import { workerData } from 'node:worker_threads'
+import { dirname } from 'path'
 import { parseJSONCFile } from '../utils/jsonc.ts'
 import { shortPath } from '../utils/path.ts'
 import * as log from './log.ts'
@@ -17,6 +18,7 @@ const {
     variablesKey = defs.variablesKey,
 }: ColorThemeWorkerParams = workerData
 
+const outDir = dirname(outPath)
 const shortSrcPath = shortPath(srcPath)
 const shortOutPath = shortPath(outPath)
 
@@ -55,6 +57,7 @@ async function update() {
             }
         }
 
+        await mkdir(outDir, { recursive: true })
         writeFile(outPath, replaced)
         watch && log.updated(shortOutPath)
     } catch (e) {

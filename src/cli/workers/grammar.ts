@@ -1,6 +1,6 @@
 import { watchFile } from 'fs'
-import { writeFile } from 'fs/promises'
-import { basename } from 'path'
+import { mkdir, writeFile } from 'fs/promises'
+import { basename, dirname } from 'path'
 import { workerData } from 'worker_threads'
 import * as log from './log.ts'
 import { grammarDefaults as defs, type GrammarWorkerParams } from './params.ts'
@@ -12,6 +12,7 @@ const {
     watch = defs.watch,
     indent = defs.indent,
 }: GrammarWorkerParams = workerData
+const outDir = dirname(outPath)
 const shortSrcPath = basename(srcPath)
 const shortOutPath = basename(outPath)
 
@@ -27,6 +28,7 @@ async function update() {
     try {
         // YAML/TOML files are supported if the JS runtime can import them, such as Bun.
         let { default: tmLanguage } = await import(`${srcPath}?t=${Date.now()}`)
+        await mkdir(outDir, { recursive: true })
         await writeFile(outPath, generateGrammarJSON(tmLanguage, indent))
         log.updated(shortOutPath)
     } catch (err) {
