@@ -1,4 +1,4 @@
-import { confirm, intro, isCancel, outro, select, spinner, text } from '@clack/prompts'
+import { CANCEL_SYMBOL, confirm, intro, isCancel, outro, select, spinner, text } from '@clack/prompts'
 import path from 'node:path'
 import { setTimeout } from 'node:timers/promises'
 import { styleText } from 'node:util'
@@ -176,7 +176,7 @@ export async function runNew(dir: string | undefined) {
     )
 }
 
-async function handleCancel<T>(value: Promise<T | symbol>): Promise<Awaited<T>> {
+async function handleCancel<T>(value: Promise<T | typeof CANCEL_SYMBOL>): Promise<T> {
     const result = await value
     if (isCancel(result)) {
         process.exit(0)
