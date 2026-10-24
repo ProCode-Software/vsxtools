@@ -1,6 +1,6 @@
 {
     "name": "vsxtools",
-    "version": "0.2.3",
+    "version": "0.2.4",
     "description": "Developer tools for building VSCode extensions",
     "type": "module",
     "main": "dist/lib/vsxtools/vsxtools.js",
